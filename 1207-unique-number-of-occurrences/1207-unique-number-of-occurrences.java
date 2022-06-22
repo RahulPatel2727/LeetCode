@@ -4,7 +4,7 @@ class Solution
     {
         Arrays.sort(arr);
         Set<Integer> set= new HashSet<>();
-        int c=0;
+        int c=1;
         if(arr.length==2 && arr[0]!=arr[1])
             return false;
         for(int i=0;i<arr.length-1;i++){
@@ -16,10 +16,14 @@ class Solution
                     return false;
                 }
                 set.add(c);
-                c=0;
+                c=1;
             }
             
         }
+        // if(arr[arr.length-1]!=arr[arr.length-2]){
+        //     // set.add(1);
+        //     return !set.contains(1);
+        // }
         return true;
     }
 }
