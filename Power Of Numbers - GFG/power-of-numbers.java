@@ -60,10 +60,14 @@ class Solution
     long power(int N,int R)
     {
         //Your code here
-         if(R ==0) return 1;
-       long temp = power(N, R/2)%1000000007;
-       long sq = (temp*temp)%1000000007;
-       if(R%2==0) return sq;
-       return (N * sq)%1000000007;
+        long res=1,a=N,n=R;
+        while(n>0){
+            if(n%2!=0){
+                res=(res*a)%1000000007;
+            }
+            a=(a*a)%1000000007;
+            n>>=1;
+        }
+        return res;
     }
 }
