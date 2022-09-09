@@ -1,53 +1,49 @@
 class Solution {
+
     public List<List<Integer>> permuteUnique(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>>list=new ArrayList<>();
-        // int min=nums[0];
-        // int max=nums[nums.length-1];
-        List<Integer>l=new ArrayList<>();
-        int arr[]=nums;
-        for(int i:arr){
-            l.add(i);
+        List<List<Integer>> results = new ArrayList<>();
+
+        // count the occurrence of each number
+        HashMap<Integer, Integer> counter = new HashMap<>();
+        for (int num : nums) {
+            if (!counter.containsKey(num))
+                counter.put(num, 0);
+            counter.put(num, counter.get(num) + 1);
         }
-        list.add(l);
-        
-        while(true){
-            int pos1=0,pos2=0;
-            for(int i=nums.length-1;i>0;i--){
-                if(arr[i]>arr[i-1]){
-                    pos1=i-1;
-                    break;
-                }
-            }
-            for(int i=nums.length-1;i>=0;i--){
-                if(arr[pos1]<arr[i]){
-                    pos2=i;
-                    break;
-                }
-            }
-            if(pos1==0&&pos2==0){
-                break;
-            }
-            int t=arr[pos1];
-            arr[pos1]=arr[pos2];
-            arr[pos2]=t;
-            reverse(arr,pos1+1,arr.length-1);
-            List<Integer>lst=new ArrayList<>();
-            for(int i:arr){
-                lst.add(i);
-            }
-            list.add(lst);
-            
-        }
-        return list;
-        
+
+        LinkedList<Integer> comb = new LinkedList<>();
+        this.backtrack(comb, nums.length, counter, results);
+        return results;
     }
-    public static void reverse(int []arr,int st,int en){
-        while(st<=en){
-            int i=arr[st];
-            arr[st]=arr[en];
-            arr[en]=i;
-            st++;en--;
+
+    protected void backtrack(
+            LinkedList<Integer> comb,
+            Integer N,
+            HashMap<Integer, Integer> counter,
+            List<List<Integer>> results) {
+
+        if (comb.size() == N) {
+            // make a deep copy of the resulting permutation,
+            // since the permutation would be backtracked later.
+            results.add(new ArrayList<Integer>(comb));
+            return;
+        }
+
+        for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+            Integer num = entry.getKey();
+            Integer count = entry.getValue();
+            if (count == 0)
+                continue;
+            // add this number into the current combination
+            comb.addLast(num);
+            counter.put(num, count - 1);
+
+            // continue the exploration
+            backtrack(comb, N, counter, results);
+
+            // revert the choice for the next exploration
+            comb.removeLast();
+            counter.put(num, count);
         }
     }
 }
