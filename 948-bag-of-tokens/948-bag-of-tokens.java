@@ -10,7 +10,7 @@ class Solution {
                 ++st;
             }
             else {
-                if(st!=en && score>0) {
+           if(st!=en && score>0) {
                     power+=tokens[en];
                     // en--;
                     score--;
