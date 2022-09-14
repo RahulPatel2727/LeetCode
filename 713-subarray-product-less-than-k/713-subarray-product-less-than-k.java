@@ -5,14 +5,14 @@ class Solution {
     private static int noOfSubArray(int []arr,int k){
         int si=0,ei=0,res=0;
         int product=1;
-        for(ei=0;ei<arr.length;ei++){
+        for(ei=0;ei<arr.length;){
             product*=arr[ei];
             while(product>=k && si<=ei){
                 product/=arr[si];
                 si++;
             }
             res+=ei-si+1;
-            // ei++;
+            ei++;
         }
         return res;
     }
