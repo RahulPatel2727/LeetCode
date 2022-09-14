@@ -2,20 +2,19 @@ class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         return noOfSubArray(nums,k);
     }
-    public static int noOfSubArray(int []arr,int k){
-        int ans=0,si=0,ei=0,p=1;
-        while(ei<arr.length){
-//            window grow
-            p=p*arr[ei];            
-//            window shrink
-            while(p>=k && si<=ei) {
-                p=p/arr[si];
+    private static int noOfSubArray(int []arr,int k){
+        int si=0,ei=0,res=0;
+        int product=1;
+        for(ei=0;ei<arr.length;){
+            product*=arr[ei];
+            while(product>=k && si<=ei){
+                product/=arr[si];
                 si++;
             }
-//            ans calculate
-            ans=ans+(ei-si+1);
+            res+=ei-si+1;
             ei++;
         }
-        return ans;
+        return res;
     }
+    
 }
