@@ -3,16 +3,16 @@ class Solution {
         return noOfSubArray(nums,k);
     }
     private static int noOfSubArray(int []arr,int k){
-        int si=0,ei=0,res=0;
-        int product=1;
-        for(ei=0;ei<arr.length;){
-            product*=arr[ei];
-            while(product>=k && si<=ei){
-                product/=arr[si];
+        int si=0,prod=1;
+        int res=0;
+        for(int i=0;i<arr.length;){
+            prod*=arr[i];
+            while(prod>=k && si<=i){
+                prod/=arr[si];
                 si++;
             }
-            res+=ei-si+1;
-            ei++;
+            res+=(i-si+1);
+            i++;
         }
         return res;
     }
