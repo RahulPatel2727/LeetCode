@@ -1,39 +1,44 @@
 class Solution {
     public int[] findDiagonalOrder(int[][] mat) {
-        // return diagonalTraversal(mat);
-        int m=mat.length;//row
-        int n=mat[0].length;//col
-        int i=0,j=0;
-        int []res=new int[m*n];
-        int ptr =0;
-        for(int itr=0;itr<m+n-1;itr++){
-            if(itr<n){
-                i=0;
-                j=itr;
-            }
-            else{
-                j=n-1;
-                i=itr-n+1;
-            }
-            ArrayList<Integer>list= new ArrayList<>();
-            while(i<m && j>=0){
-                list.add(mat[i][j]);
-                i++;
-                j--;
-            }
-            if(itr%2==0){
-                for(int k=list.size()-1;k>=0;k--){
-                    res[ptr]=list.get(k);
-                    ptr++;
+        int m = mat.length;
+        if(m == 0){
+            return new int[]{};
+        }
+        int n = mat[0].length;
+        if(n == 0){
+            return new int[]{};
+        }
+        
+        
+        int row = 0;
+        int col = 0;
+        
+        int [] ans = new int[m * n];
+        for(int i = 0; i < m * n; i++){
+            ans[i] = mat[row][col];
+            if((row + col) % 2 == 0){
+                // even sum means upward traversal
+               // row++;
+                if(col == n - 1){
+                    row++;
+                } else if(row == 0){
+                    col++;
+                } else {
+                    row--;
+                    col++;
                 }
-            }
-            else{
-                for(Integer val:list){
-                    res[ptr]=val;
-                    ptr++;
+            } else {
+//                 odd sum means downward traversal
+                if(row == m - 1){
+                    col++;
+                } else if(col == 0){
+                    row++;
+                } else {
+                    row++;
+                    col--;
                 }
             }
         }
-        return res;
+        return ans;
     }
 }
