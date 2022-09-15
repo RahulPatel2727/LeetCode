@@ -3,18 +3,18 @@ class Solution {
         return noOfSubArray(nums,k);
     }
     private static int noOfSubArray(int []arr,int k){
-        int si=0,prod=1;
-        int res=0;
-        for(int i=0;i<arr.length;){
-            prod*=arr[i];
-            while(prod>=k && si<=i){
-                prod/=arr[si];
+        int total=0;
+        int si=0;
+        int p=1;
+        for(int i=0;i<arr.length;i++){
+            p*=arr[i];
+            while(p>=k && si<=i){
+                p/=arr[si];
                 si++;
             }
-            res+=(i-si+1);
-            i++;
+            total+=i-si+1;
         }
-        return res;
+        return total;
     }
     
 }
