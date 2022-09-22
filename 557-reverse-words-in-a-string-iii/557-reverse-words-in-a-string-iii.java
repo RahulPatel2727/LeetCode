@@ -1,20 +1,19 @@
 class Solution {
-
     public String reverseWords(String s) {
-        StringBuilder result = new StringBuilder();
-        int lastSpaceIndex = -1;
-        for (int strIndex = 0; strIndex < s.length(); strIndex++) {
-            if ((strIndex == s.length() - 1) || s.charAt(strIndex) == ' ') {
-                int reverseStrIndex = (strIndex == s.length() - 1) ? strIndex : strIndex - 1;
-                for (; reverseStrIndex > lastSpaceIndex; reverseStrIndex--) {
-                    result.append(s.charAt(reverseStrIndex));
-                }
-                if (strIndex != s.length() - 1) {
-                    result.append(' ');
-                }
-                lastSpaceIndex = strIndex;
-            }
+        String t = new StringBuilder(s).reverse().toString();
+        String []arr=t.split(" ");
+        String res="";
+        reverse(0,arr.length-1,arr);
+        for(String sss:arr)
+            res+=sss+" ";
+        return res.trim();
+    }
+    private static void reverse(int si,int ei , String []a){
+        while(si<=ei){
+            String c = a[si];
+            a[si]=a[ei];
+            a[ei]=c;
+            si++;ei--;
         }
-        return new String(result);
     }
 }
