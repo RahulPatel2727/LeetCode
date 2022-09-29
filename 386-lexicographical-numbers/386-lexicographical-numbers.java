@@ -2,7 +2,7 @@ class Solution {
     public List<Integer> lexicalOrder(int n) {
         List <Integer> list = new ArrayList<>();
         printLexico(0,n,list);
-        list.remove(0);
+        // list.remove(0);
         return list;
     }
     public static void printLexico(int cur, int n, List<Integer> list){
@@ -10,7 +10,9 @@ class Solution {
             return;
         }
         // System.out.println(cur);
-        list.add(cur);
+        if(cur!=0){
+            list.add(cur);
+        }
         int i =0;
         if(cur == 0){
             i = 1;
