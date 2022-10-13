@@ -4,17 +4,17 @@ class Solution {
         for(int i=0;i<tiles.length();i++){
             frq[tiles.charAt(i)-'A']++;
         }
-        return tilePossibilities(frq,"");
+        return tilePossibilities(frq);
         
     }
-     public static int tilePossibilities(int [] frq, String ans){
+     public static int tilePossibilities(int [] frq){
         // System.out.println(ans);
          int count = 0;
         for (int i = 0; i < frq.length ; i++) {
             if(frq[i]>=1){
                 char ch = (char) (i+'A');
                 frq[i]--;
-                count += tilePossibilities(frq,ans+ch)+1;
+                count += tilePossibilities(frq)+1;
                 frq[i]++;
             }
         }
