@@ -10,21 +10,20 @@
  */
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
-         if (head.next == null)
+          if (head.next == null)
             return null;
-        ListNode c=head;
-        int count=0;
-        while(c!=null){
-            count++;
-            c=c.next;
+        
+        // Initialize two pointers, 'slow' and 'fast'.
+        ListNode slow = head, fast = head.next.next;
+        
+        // Let 'fast' move forward by 2 nodes, 'slow' move forward by 1 node each step.
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
         
-        ListNode temp = head;
-        int middleIndex=count/2;;
-        for (int i = 0; i < middleIndex - 1; ++i)
-            temp = temp.next;
-       temp.next=temp.next.next;
-        return head;
-        
+        // When 'fast' reaches the end, remove the next node of 'slow' and return 'head'.
+        slow.next = slow.next.next;
+        return head;      
     }
 }
