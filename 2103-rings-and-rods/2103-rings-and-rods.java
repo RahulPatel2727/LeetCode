@@ -1,16 +1,28 @@
 class Solution {
     public int countPoints(String rings) {
-        String [] arr = {"","","","","","","","","","",};
-        for(int i=0;i<rings.length()-1;i+=2){
-            char ch = rings.charAt(i);
-            int indx = Character.getNumericValue(rings.charAt(i+1));
-            if(!arr[indx].contains(""+ch)){
-                arr[indx]+=""+ch;
+        String str = rings;
+        Set<Integer> r = new HashSet<>();
+        Set<Integer> g = new HashSet<>();
+        Set<Integer> b = new HashSet<>();
+        for(int i=0;i<str.length()-1;i += 2){
+            int rod = Character.getNumericValue(str.charAt(i+1));
+            char ch = str.charAt(i);
+            if(ch=='R'){
+                r.add(rod);
+            }
+            else if(ch == 'G'){
+                g.add(rod);
+            }
+            else if(ch == 'B'){
+                b.add(rod);
             }
         }
-        int count =0;
-        for(String st : arr){
-            if(st.length()==3){
+        // System.out.println(r);
+        // System.out.println(g);
+        // System.out.println(b);
+        int count = 0;
+        for(int i=0;i<=9;i++){
+            if(r.contains(i) && g.contains(i) && b.contains(i)){
                 count ++;
             }
         }
