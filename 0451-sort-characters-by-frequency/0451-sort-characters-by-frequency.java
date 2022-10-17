@@ -2,8 +2,8 @@ class Solution {
     public String frequencySort(String s) {
 //        making a map for storing all the different character and their freqiencies
         Map<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        for (char ch : s.toCharArray()) {
+            map.put(ch,map.getOrDefault(ch,0)+1);   
         }
         
 //        making reasulting string 
