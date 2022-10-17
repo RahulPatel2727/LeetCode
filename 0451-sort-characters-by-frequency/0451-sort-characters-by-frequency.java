@@ -1,23 +1,21 @@
 class Solution {
     public String frequencySort(String s) {
-//         this code is of someone else 
-        // Count the occurence on each character
-	HashMap<Character, Integer> cnt = new HashMap<>();
-	for (char c : s.toCharArray()) {
-		cnt.put(c, cnt.getOrDefault(c, 0) + 1);
-	}
-	
-	// Sorting
-	List<Character> chars = new ArrayList(cnt.keySet());
-	Collections.sort(chars, (a, b) -> (cnt.get(b) - cnt.get(a)));
-
-	// Build string
-	StringBuilder sb = new StringBuilder();
-	for (Object c : chars) {
-		for (int i = 0; i < cnt.get(c); i++) {
-			sb.append(c);
-		}
-	}
-	return sb.toString();
+//        making a map for storing all the different character and their freqiencies
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        }
+        
+//        making reasulting string 
+        String res = "";
+        while(!map.isEmpty()) {
+            Character max = Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
+            int len = map.get(max);
+            for(int j=0;j<len;j++){
+                res += max;
+            }
+            map.remove(max);
+        }
+        return res;
     }
 }
