@@ -1,21 +1,23 @@
 class Solution {
     public String frequencySort(String s) {
-//        making a map for storing all the different character and their freqiencies
+//         this is also coppied
         Map<Character, Integer> map = new HashMap<>();
-        for (char ch : s.toCharArray()) {
-            map.put(ch,map.getOrDefault(ch,0)+1);   
+        for(char c: s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        // sort in max heap
+        PriorityQueue<Character> maxHeap =
+            new PriorityQueue<>((c1, c2) -> Integer.compare(map.get(c2), map.get(c1)));
+        for(char c: map.keySet()) maxHeap.add(c);
+        
+        // build output
+        StringBuilder output = new StringBuilder();
+        while(maxHeap.size() > 0) {
+            char c = maxHeap.poll();
+            int count = map.get(c);
+            for(int i = 0; i < count; i++) output.append(c);
         }
         
-//        making reasulting string 
-        String res = "";
-        while(!map.isEmpty()) {
-            Character max = Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
-            int len = map.get(max);
-            for(int j=0;j<len;j++){
-                res += max;
-            }
-            map.remove(max);
-        }
-        return res;
+        return output.toString();
     }
 }
