@@ -10,7 +10,7 @@ class Solution {
         }
         for(int i=0;i<len;i++){
             char ch = s.charAt(i);
-            if(frq[ch-'a']==1){
+            if(frq[ch -'a']==1){
                 return i;
             }
         }
