@@ -26,6 +26,7 @@ class Solution {
                     equal = true;
                 }
             }
+            
             // if break then continue
             if(f){
                 f = false;
