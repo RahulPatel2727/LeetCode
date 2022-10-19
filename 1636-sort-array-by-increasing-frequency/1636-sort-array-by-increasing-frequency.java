@@ -10,12 +10,12 @@ class Solution {
         Collections.sort(ans, (a, b) -> {               
             return map.get(a) == map.get(b) ? b - a : map.get(a) - map.get(b);
         });
-        
-        int [] res = new int[ans.size()];
-        int i=0;
-        for(Integer it: ans){
-            res[i++]=it;
-        }
-        return res;
+        return ans.stream().mapToInt(i -> i).toArray();
+        // int [] res = new int[ans.size()];
+        // int i=0;
+        // for(Integer it: ans){
+        //     res[i++]=it;
+        // }
+        // return res;
     }
 }
