@@ -10,35 +10,29 @@
  */
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
-//         faltu approtch but it works
-        List < Integer> list = new ArrayList<>();
+        while(head != null && head.val == val){
+                head = head.next;
+        }
+        if(head == null){
+            return head;
+        }
         ListNode temp = head;
-        
-        while(temp != null){
-            list.add(temp.val);
-            if(list.contains(val)){
-                list.remove(list.indexOf(val));
+        ListNode pre = null;
+        while(temp.next != null){
+            if(temp.val == val){
+                pre.next = temp.next;
+                temp.next = null;
+                temp = pre.next;
+                continue;
             }
+            pre = temp;
             temp = temp.next;
         }
-        
-        if(list.size()==0){
-            ListNode res = null;
-            return res;
-        } 
-        
-        int i = 0;
-        temp = new ListNode(list.get(i));
-        i=i+1;
-        ListNode res = temp;
-        
-        while(i<list.size()){
-            temp.next = new ListNode(list.get(i));
-            temp = temp.next;
-            i++;
+        if(temp.val==val){
+            System.out.println(pre.val+" ");
+            pre.next=null;
         }
-        return res;
-        
+        return head;
         // if(head == null ){
         //     return head;
         // }
