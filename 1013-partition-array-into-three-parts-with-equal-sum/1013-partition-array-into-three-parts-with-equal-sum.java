@@ -15,7 +15,7 @@ class Solution {
             if(one == temp){
                 count ++;
                 if(count == 3)
-                    break;
+                    return true;
                 temp = 0;
             }
         }
