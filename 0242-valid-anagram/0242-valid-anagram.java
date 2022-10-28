@@ -3,7 +3,8 @@ class Solution {
         if(s.length()!=t.length()){
             return false;
         }
-        return isAnagram1(s,t);
+        // return isAnagram1(s,t);
+        return isAnagram2(s,t);
     }
     // method 1 using frequency
     public static boolean isAnagram1(String a,String b){
@@ -19,5 +20,16 @@ class Solution {
             }
         }
         return true;
+    }
+    
+    // method 2 short the words
+    public static boolean isAnagram2(String a, String b){
+        char [] ch = a.toCharArray();
+        Arrays.sort(ch);
+        String aa = String.valueOf(ch);
+        ch = b.toCharArray();
+        Arrays.sort(ch);
+        String bb = String.valueOf(ch);
+        return aa.equals(bb);
     }
 }
