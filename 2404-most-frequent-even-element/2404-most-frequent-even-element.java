@@ -1,29 +1,20 @@
 class Solution {
-    public int mostFrequentEven(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int i : nums){
-            if(i%2==0)
-                map.put(i,map.getOrDefault(i,0)+1);
-        }
-        
-        int res = -1;
-        int max = -1;
-        
-        for(Map.Entry<Integer, Integer> mp : map.entrySet()){
-            int num = mp.getKey();
-            int frq = mp.getValue();
-            if(max<frq){
-                max = frq;
-                res = num;
+    public int mostFrequentEven(int[] A) {
+        HashMap<Integer,Integer> mp= new HashMap<>();
+        int val=1000000,freq=0;
+        for(var i:A){
+            //if even element
+            if(i%2==0){
+                //increase frequency in map
+                int curr= mp.getOrDefault(i,0)+1;
+                mp.put(i,curr);
+                //Update smallest with greatest frequency
+                if(curr>freq || curr==freq && i<val){
+                    val=i;
+                    freq=curr;
+                }
             }
-            else if(max == frq){
-                res = Math.min(res, num);
-            }
-            
         }
-        if(res>=0)
-            return res;
-        else
-            return -1;
+        return freq==0? -1 : val;
     }
 }
