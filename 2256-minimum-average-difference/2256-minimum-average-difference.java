@@ -14,12 +14,10 @@ class Solution {
         for(int i=0;i<sum.length;i++){
             int a,b;
             if(i == len-1){
-                // System.out.println("1");
                 a=(int) (sum[i]/(i+1));
                 b = 0;
             }
             else{
-                // System.out.println("2");
                 a = (int) (sum[i]/(i+1));
                 b =(int) ((sum[len-1] - sum[i])/(len-i-1));
             }
