@@ -16,6 +16,8 @@ class Solution {
             frq[i]=mp.getValue();
             i++;
         }
+        
+        //bubble sort the frequency w.r.t  el
         for(int j = 0; j<el.length;j++){
             for(int m = j+1;m<el.length;m++){
                 if(frq[j]>frq[m]){
