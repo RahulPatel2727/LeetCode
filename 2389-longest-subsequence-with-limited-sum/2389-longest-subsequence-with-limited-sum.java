@@ -1,26 +1,25 @@
 class Solution {
     public int[] answerQueries(int[] nums, int[] queries) {
+        // Sort 'nums'
         Arrays.sort(nums);
-        for(int q=0;q<queries.length;q++){
-            int val = queries[q];
-            int sum = 0;
-            int c = 0;
-            for(int i=0;i<nums.length;i++){
-                sum += nums[i];
-                c++;
-                if(sum>val){
-                    queries[q] = i;
+        int n = nums.length, m = queries.length;
+        int answer[] = new int[m];
+        
+        // For each query, collect numbers from lowest to highest.
+        // If their sum exceeds the limit 'query', move on to the next query.
+        for (int i = 0; i < m; ++i) {
+            int count = 0;
+            int query = queries[i];
+            for (int num : nums) {
+                if (query >= num) {
+                    count++;
+                    query -= num;
+                }
+                else
                     break;
-                }
-                else if(sum == val){
-                    queries[q] = i+1;
-                    break;
-                }
-                else if(i==nums.length-1 && sum < val){
-                    queries[q] = i+1;
-                }
             }
+            answer[i] = count;
         }
-        return queries;
+        return answer;
     }
 }
