@@ -1,26 +1,30 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
-        List<List<Integer>> res = new ArrayList<>();
-        combination(candidates,target,0,res,new ArrayList<>());
-        return res;
+        List<List<Integer>> ans = new ArrayList<>();
+        find(candidates, target, 0, new ArrayList<>(), ans);
+        // List<List<Integer>> a = new ArrayList(ans);
+        return ans;
+        
     }
-    public static void combination(int[] arr, int target, int idx,List<List<Integer>> res,List<Integer>list) {
-		if (target == 0) {
-            res.add(new ArrayList(list));
-			// System.out.print(ans+" ");
-			return;
-		}
-		for (int i = idx; i < arr.length; i++) {
-			if (i != idx && arr[i] == arr[i - 1]) {
-				continue;
-			}
-			if (target >= arr[i]) {
-                list.add(arr[i]);
-				combination(arr, target - arr[i], i + 1,res,list);
-                list.remove(list.size()-1);
-			}
-
-		}
-	}
+    public static void find(int [] arr, int val, int ind, List<Integer> ds, List<List<Integer>> ans){
+        // if(ind == arr.length){
+            if(val == 0){
+                ans.add(new ArrayList<>(ds));
+            // }
+            return;
+        }
+        for(int i = ind; i < arr.length; i++){
+            if(i != ind && arr[i] == arr[i-1]){
+                continue;
+            }
+            if(val >= arr[i]){
+                ds.add(arr[i]);
+                find(arr, val-arr[i], i+1, ds, ans);
+                ds.remove(ds.size()-1);
+            }
+        }
+        // find(arr,val, ind+1, ds, ans);
+    }
+    
 }
