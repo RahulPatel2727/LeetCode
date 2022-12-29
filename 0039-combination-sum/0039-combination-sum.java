@@ -1,26 +1,21 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> ans = new ArrayList<>();
-        combi(candidates, 0,target, 0, new ArrayList<>(),ans);
+        find(candidates, 0, target, new ArrayList<>(), ans);
         return ans;
     }
-    public static void combi(int [] arr,int ind, int target,int sum, List<Integer> temp, List<List<Integer>> ans){
-        if(sum>target){
-            return;
-        }
-        if(sum == target){
-            ans.add(new ArrayList<>(temp));
-            return;
-        }
+    public static void find(int []arr, int ind, int val, List<Integer> ds, List<List<Integer>> ans){
         if(ind == arr.length){
-            return;
+            if(val == 0){
+                ans.add(new ArrayList<>(ds));
+            }
+            return;      
         }
-        
-        sum += arr[ind];
-        temp.add(arr[ind]);
-        combi(arr,ind,target,sum,temp,ans);
-        sum -= arr[ind];
-        temp.remove(temp.size()-1);
-        combi(arr,ind+1,target,sum,temp,ans);
+        if(val >= arr[ind]){
+            ds.add(arr[ind]);
+            find(arr, ind, val-arr[ind], ds, ans);
+            ds.remove(ds.size()-1);
+        }
+        find(arr,ind+1, val, ds, ans);
     }
 }
