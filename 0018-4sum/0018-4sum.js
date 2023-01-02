@@ -4,55 +4,54 @@
  * @return {number[][]}
  */
 var fourSum = function(nums, target) {
+    // Sort the array
     nums.sort((a, b) => a - b);
-    return kSum(nums, target, 0, 4);
+    
+    // Initialize an empty result array
+    let result = [];
+    
+    // Iterate through the array
+    for (let i = 0; i < nums.length - 3; i++) {
+        // Skip duplicates
+        if (i > 0 && nums[i] == nums[i - 1]) continue;
+        
+        // Set the target for the 3Sum problem to target - nums[i]
+        let threeSumTarget = target - nums[i];
+        
+        // Solve the 3Sum problem
+        for (let j = i + 1; j < nums.length - 2; j++) {
+            // Skip duplicates
+            if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+            
+            // Set the pointers to the first and last elements of the remaining array
+            let left = j + 1;
+            let right = nums.length - 1;
+            
+            // Solve the 2Sum problem
+            while (left < right) {
+                // Calculate the current sum
+                let sum = nums[j] + nums[left] + nums[right];
+                
+                // If the sum is equal to the target, add the current combination to the result array
+                if (sum == threeSumTarget) {
+                    result.push([nums[i], nums[j], nums[left], nums[right]]);
+                    
+                    // Skip duplicates
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    
+                    // Move the pointers
+                    left++;
+                    right--;
+                }
+                // If the sum is less than the target, move the left pointer
+                else if (sum < threeSumTarget) left++;
+                // If the sum is greater than the target, move the right pointer
+                else right--;
+            }
+        }
+    }
+    
+    // Return the result array
+    return result;
 };
-var kSum  = function (nums,  target,  start,  k) {
-    let res = [];
-
-    // If we have run out of numbers to add, return res.
-    if (start == nums.length) {
-      return res;
-    }
-
-    // There are k remaining values to add to the sum. The 
-    // average of these values is at least target / k.
-    let average_value = target / k;
-
-    // We cannot obtain a sum of target if the smallest value
-    // in nums is greater than target / k or if the largest 
-    // value in nums is smaller than target / k.
-    if (nums[start] > average_value || average_value > nums[nums.length - 1]) {
-      return res;
-    }
-
-    if (k == 2) {
-      return twoSum(nums, target, start);
-    }
-
-    for (let i = start; i < nums.length; ++i) {
-      if (i == start || nums[i - 1] != nums[i]) {
-        for (let subset of kSum(nums, target - nums[i], i + 1, k - 1)) {
-          res.push([nums[i], ...subset]);
-        }
-      }
-    }
-
-    return res;
-  }
-
- var twoSum = function(nums, target,  start) {
-    let res = [];
-    let s = new Set();
-
-    for (let i = start; i < nums.length; ++i) {
-      if (res.length == 0 || res[res.length - 1][1] != nums[i]) {
-        if (s.has(target - nums[i])) {
-          res.push([target - nums[i], nums[i]]);
-        }
-      }
-      s.add(nums[i]);
-    }
-
-    return res;
-  }
