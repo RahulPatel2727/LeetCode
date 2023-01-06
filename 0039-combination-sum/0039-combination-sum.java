@@ -4,18 +4,18 @@ class Solution {
         find(candidates, 0, target, new ArrayList<>(), ans);
         return ans;
     }
-    public static void find(int []arr, int ind, int val, List<Integer> ds, List<List<Integer>> ans){
+    public static void find(int []arr, int ind, int val, List<Integer> list, List<List<Integer>> ans){
         if(ind == arr.length){
             if(val == 0){
-                ans.add(new ArrayList<>(ds));
+                ans.add(new ArrayList<>(list));
             }
             return;      
         }
         if(val >= arr[ind]){
-            ds.add(arr[ind]);
-            find(arr, ind, val-arr[ind], ds, ans);
-            ds.remove(ds.size()-1);
+            list.add(arr[ind]);
+            find(arr, ind, val-arr[ind], list, ans);
+            list.remove(list.size()-1);
         }
-        find(arr,ind+1, val, ds, ans);
+        find(arr,ind+1, val, list, ans);
     }
 }
