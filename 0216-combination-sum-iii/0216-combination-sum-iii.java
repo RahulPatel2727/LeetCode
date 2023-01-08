@@ -15,8 +15,8 @@ class Solution {
                 find3(k, val - i,i+1, list, ans);
             
                 list.remove(list.size() - 1);
-                if(i>val)
-                    break;
+                // if(i>val)
+                //     break;
             }
         }
     }
