@@ -12,7 +12,6 @@ class Solution {
                     int t = odd;
                     odd = even;
                     even = t;
-                    // continue;
                 }
             }
             
