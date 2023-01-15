@@ -15,7 +15,8 @@ class GFG {
 		    String inputLine[] = br.readLine().trim().split(" ");
 		    long[] arr = new long[n];
 		    for(int i=0; i<n; i++)arr[i]=Long.parseLong(inputLine[i]);
-		    long[] res = new Solution().nextLargerElement(arr, n);
+		    Solution ob = new Solution();
+		    long[] res = ob.nextLargerElement(arr, n);
 		    for (int i = 0; i < n; i++) 
 		        System.out.print(res[i] + " ");
 		    System.out.println();
@@ -29,30 +30,27 @@ class GFG {
 // } Driver Code Ends
 
 
-class Solution
-{
-    //Function to find the next greater element for each element of the array.
-    public static long[] nextLargerElement(long[] arr, int n)
-    { 
+// User Function Template for JAVA
+
+class Solution{
+    public static long[] nextLargerElement(long[] arr, int n) { 
         // Your code here
-        NGE(arr);
-        return arr;
-    } 
-    public static void NGE(long [] arr){
         long [] ans = new long[arr.length];
         Stack<Integer> st = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            while(!st.isEmpty() && arr[i]>arr[st.peek()]){
-                ans[st.pop()]=arr[i];
+        int len = arr.length;
+        // ans[len-1] = -0;
+        for(int i=len-1;i>=0;i--){
+            while(!st.isEmpty() && arr[st.peek()]<arr[i]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                ans[i] = -1;
+            }
+            else{
+                ans[i] = arr[st.peek()];
             }
             st.push(i);
         }
-        while(!st.isEmpty()){
-            ans[st.pop()] = -1;
-        }
-        int ind = 0;
-        for(long i:ans){
-            arr[ind++]=i;
-        }
-    }
+        return ans;
+    } 
 }
