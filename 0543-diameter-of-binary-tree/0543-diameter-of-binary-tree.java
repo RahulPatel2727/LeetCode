@@ -15,25 +15,18 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
+        return idm(root);
+    }
+    public static int idm(TreeNode root){
         if(root == null){
             return 0;
         }
-        int ld = diameterOfBinaryTree(root.left);
-        int rd = diameterOfBinaryTree(root.right);
+        int ld = idm(root.left);
+        int rd = idm(root.right);
         int sd = ht(root.left)+ht(root.right)+2;
         return Math.max(ld,Math.max(rd,sd));
-// return idm(root);
     }
-    // public static int idm(TreeNode root){
-    //     if(root == null){
-    //         return 0;
-    //     }
-    //     int ld = idm(root.left);
-    //     int rd = idm(root.left);
-    //     int sd = ht(root.left)+ht(root.right)+2;
-    //     return Math.max(ld,Math.max(rd,sd));
-    // }
-    public int ht(TreeNode root){
+    public static int ht(TreeNode root){
         if(root == null){
             return -1;
         }
