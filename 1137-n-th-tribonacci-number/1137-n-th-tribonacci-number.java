@@ -1,6 +1,7 @@
 class Solution {
+    int [] memo;
     public int tribonacci(int n) {
-        int [] memo = new int[38]; // 0 through 37
+        memo = new int[38]; // 0 through 37
         memo[0] = 0;
         memo[1] = 1;
         memo[2] = 1;
