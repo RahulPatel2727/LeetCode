@@ -1,31 +1,34 @@
 class Solution {
     public int maxSubarraySumCircular(int[] nums) {
-        return max(nums);
-    }
-    private static int max(int []arr){
-        int subArraySum=kadane(arr);
-        int linearSum=0;
-        for(int i:arr){
-            linearSum+=i;
+        int sum = 0;
+        for(int i:nums){
+            sum+=i;
         }
+        int kS = kSum(nums);
+        
+        for(int i=0;i<nums.length;i++){
+            nums[i]*=-1;
+        }
+        
+        int nkS = kSum(nums);
+        
+        int res = sum + nkS;
+        if(res <= 0){
+            return kS;
+        }
+        int m = Math.max(kS,res);
+        return m;
+    }
+    public static int kSum(int [] arr){
+        int t = 0;
+        int max = Integer.MIN_VALUE;
         for(int i=0;i<arr.length;i++){
-            arr[i]*=-1;
-        }
-        int middleSum=kadane(arr);
-        int sum = linearSum+middleSum;
-        if(sum==0){
-            return subArraySum;
-        }
-        return Math.max(sum,subArraySum);
-    }
-    private static int kadane(int []arr){
-        int cur=0,max=Integer.MIN_VALUE;
-        for(int i:arr){
-            cur+=i;
-            max=Math.max(cur,max);
-            if(cur<0){
-                cur=0;
+            t += arr[i];
+            max = Math.max(t,max);
+            if(t<0){
+                t = 0;
             }
+            
         }
         return max;
     }
