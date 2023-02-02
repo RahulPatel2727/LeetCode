@@ -1,6 +1,37 @@
 class Solution {
     public boolean isAlienSorted(String[] words, String order) {
-        return isSorted(words, order);
+       
+        int[] arr = new int[26];
+        int seq = 0;
+        for(char ch : order.toCharArray())
+        {
+            arr[ch-'a'] = seq++;
+        }
+        for(int i=0;i<words.length-1;i++)
+        {
+            String curr = words[i];
+            String next = words[i+1];
+
+            int len = Math.min(curr.length(),next.length());
+
+            if(len != curr.length() && len == next.length() && curr.startsWith(next))
+            {
+                return false;
+            }
+
+            for(int l=0;l<len;l++)
+            {
+                if(arr[curr.charAt(l)-'a'] > arr[next.charAt(l)-'a'])
+                {
+                    return false;
+                }
+                if(arr[curr.charAt(l)-'a'] < arr[next.charAt(l)-'a'])
+                {
+                    break;
+                }
+            }
+        }
+        return true;
     }
     public static boolean isSorted(String[] words, String order) {
         boolean f = false;
