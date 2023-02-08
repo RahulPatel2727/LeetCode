@@ -1,14 +1,17 @@
 class Solution {
     public boolean canJump(int[] nums) {
-        if(nums.length < 2) 
-            return true;
-        int en = 0;
-        for(int i=0;i<nums.length-1;i++){
-            en = (en>nums[i]+i) ? en : nums[i]+i;
-            if(i+1>en){
-                return false;
-            }
-        }
-        return true;
+        if(nums.length < 2) return true;
+       
+       for(int curr = nums.length-2; curr>=0;curr--){
+           if(nums[curr] == 0){
+               int neededJumps = 1;
+               while(neededJumps > nums[curr]){
+                   neededJumps++;
+                   curr--;
+                   if(curr < 0) return false;
+               }
+           }
+       }
+       return true;
     }
 }
