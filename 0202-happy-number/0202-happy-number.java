@@ -10,6 +10,8 @@ class Solution {
                 int d = (int)temp%10;
                 sum += d*d;
                 temp/=10;
+                // if(sum == 4)
+                //     return false;
             }
             if(sum==1)
                 return true;
