@@ -5,31 +5,27 @@ class Solution {
             frq[s.charAt(i)-'a']++;
         }
         int count = s.length();
-        int i=0;String ans = "";
+        String ans = "";
         while(count!=0){
-            int it;
-            if(i%2==0){
-                it = 0;
-                while(it<26){
-                    if(frq[it]!=0){
-                        ans += (char)('a' + it);
-                        frq[it]-=1;
-                        count-=1;
-                    }
-                    it++;
+            int it1 = 0;
+            while(it1<26){
+                if(frq[it1]!=0){
+                    ans += (char)('a'+it1);
+                    frq[it1] -= 1;
+                    count -= 1;
                 }
-            }else{
-                it = 25;
-                while(it>=0){
-                    if(frq[it]!=0){
-                        ans += (char)('a' + it);
-                        frq[it]-=1;
-                        count-=1;
-                    }
-                    it--;
-                }
+                it1++;
             }
-            i++;
+            
+            int it2 = 25;
+            while(it2>=0){
+                if(frq[it2]!=0){
+                    ans += (char)('a'+it2);
+                    frq[it2]-= 1;
+                    count -= 1;
+                }
+                it2--;
+            }
         }
         return ans;   
     }
