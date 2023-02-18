@@ -11,14 +11,8 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode ans = null;
-        if(lists.length==0){
-            return null;
-        }
-        if(lists.length==1){
-            return lists[0];
-        }
-
         int it = 0;
+        //finding first not null ll
         for(int i=0;i<lists.length;i++){  
             if(lists[i]!=null){
                 ans = lists[i];
@@ -26,6 +20,8 @@ class Solution {
                 break;
             }
         }
+        
+        //finding 2nd not null ll and merging it
         for(int i=it+1;i<lists.length;i++){
             ListNode one = lists[i];
             if(one != null){
