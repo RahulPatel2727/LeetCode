@@ -6,8 +6,7 @@ class Solution {
             int si = 0, ei = potions.length-1;
             while(si<=ei){
                 int mid = si + (ei - si)/2;
-                long prod = (long) it * potions[mid];
-                if(prod >= success){
+                if(((long) it * potions[mid]) >= success){
                     ei = mid - 1;
                 }
                 else{
