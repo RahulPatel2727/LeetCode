@@ -1,17 +1,15 @@
 class Solution {
     public int arraySign(int[] nums) {
-        int c = 0, z = 0;
+        int c = 1;
         for(int it : nums){
             if(it == 0){
                 return 0;
             }
-            else if(it < 0){
-                c++;
+            if(it < 0){
+                c *= -1;
             }
+            
         }
-        if(c % 2 == 0){
-            return 1;
-        }
-        return -1;
+        return c;
     }
 }
