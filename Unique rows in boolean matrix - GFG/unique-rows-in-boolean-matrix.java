@@ -38,20 +38,20 @@ public static void main(String[] args)throws IOException
 /*Complete the given function*/
 class GfG
 {
-    public static ArrayList<ArrayList<Integer>> uniqueRow(int arr[][],int r, int c)
+    public static ArrayList<ArrayList<Integer>> uniqueRow(int a[][],int r, int c)
     {
         //add code here.
-        HashSet<ArrayList<Integer>> set = new HashSet<>();
+        Set<ArrayList<Integer>> set = new HashSet<>();
         ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        for(int i=0;i<arr.length;i++){
-            ArrayList<Integer> temp = new ArrayList<>();
-            for(int j=0;j<arr[0].length;j++){
-                temp.add(arr[i][j]);
+        for(int [] it : a){
+            ArrayList<Integer> row = new ArrayList<>();
+            for(int i:it){
+                row.add(i);
             }
-            if(!set.contains(temp)){
-                ans.add(temp);
-                set.add(temp);
+            if(!set.contains(row)){
+                ans.add(row);
             }
+            set.add(row);
         }
         return ans;
     }
