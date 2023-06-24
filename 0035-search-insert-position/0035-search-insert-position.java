@@ -1,9 +1,18 @@
 class Solution {
     public int searchInsert(int[] nums, int target) {
-        int m = Arrays.binarySearch(nums,target);
-        if(m>=0)
-            return m;
-        else
-           return Math.abs(m)-1;
+        int si = 0, ei = nums.length-1;
+        while(si<=ei){
+            int mid = si + (ei - si)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            else if(nums[mid]<target){
+                si = mid + 1;
+            }
+            else{
+                ei = mid - 1;
+            }
+        }
+        return si;
     }
 }
