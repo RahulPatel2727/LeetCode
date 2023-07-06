@@ -1,3 +1,4 @@
+[Discussion Post (created on 6/6/2023 at 8:42)](https://leetcode.com/problems/minimum-size-subarray-sum/discuss/3724839/Java-Sliding-window-Easy-Solution)  
 <h2>  Minimum Size Subarray Sum</h2><hr><div><p>Given an array of positive integers <code>nums</code> and a positive integer <code>target</code>, return <em>the <strong>minimal length</strong> of a </em><span data-keyword="subarray-nonempty"><em>subarray</em></span><em> whose sum is greater than or equal to</em> <code>target</code>. If there is no such subarray, return <code>0</code> instead.</p>
 
 <p>&nbsp;</p>
