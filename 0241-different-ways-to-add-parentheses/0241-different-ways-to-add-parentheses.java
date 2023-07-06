@@ -1,39 +1,30 @@
 class Solution {
-    public static List<Integer> diffWaysToCompute(String input) {
-        List res = new ArrayList();
-        int tmp = isNum(input);
-        if(tmp >= 0) {
-            res.add(tmp);
+     public List<Integer> diffWaysToCompute(String expression) {
+        List<Integer> res = new LinkedList<>();
+        if (!expression.contains("*") && !expression.contains("+") && !expression.contains("-")) {
+            res.add(Integer.parseInt(expression));
             return res;
         }
-        for(int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            if(c == '+' || c == '-' || c == '*') {
-                List<Integer> left = diffWaysToCompute(input.substring(0, i));
-                List<Integer> right = diffWaysToCompute(input.substring(i+1));
-                for(Integer l : left) {
-                    for(Integer r : right) {
-                        if(c == '+')
-                            res.add(l + r);
-                        else if(c == '-')
-                            res.add(l - r);
-                        else
-                            res.add(l * r);
+        for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
+            if (c == '-' || c == '+' || c == '*') {
+                List<Integer> left = diffWaysToCompute(expression.substring(0, i));
+                List<Integer> right = diffWaysToCompute(expression.substring(i + 1));
+                for (int a : left) {
+                    for (int b : right) {
+                        if (c == '-') {
+                            res.add(a - b);
+                        }
+                        else if (c == '+') {
+                            res.add(a + b);
+                        }
+                        else if (c == '*') {
+                            res.add(a * b);
+                        }
                     }
                 }
             }
         }
         return res;
-    }
-
-    private static int isNum(String s) {
-        int res = 0;
-        for(int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if(!Character.isDigit(c))
-                return -1;
-            res = res * 10 + c - '0';
-        }
-        return res;
-    }
+     }
 }
