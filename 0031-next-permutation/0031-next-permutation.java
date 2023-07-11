@@ -1,39 +1,41 @@
 class Solution {
-    public void nextPermutation(int[] nums) {
-        point(nums);
-    }
-    private static void point(int []arr){
-        int pos1=0,pos2=0;
-        for(int i=arr.length-1;i>0;i--){
-            if(arr[i]>arr[i-1]){
-                pos1=(i-1);
+    public void nextPermutation(int[] arr) {
+        int n = arr.length;
+        int point1 = -1;
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]<arr[i+1]){
+                point1 = i;
                 break;
             }
         }
-        for(int i=arr.length-1;i>pos1;i--){
-            if(arr[i]>arr[pos1]){
-                pos2=i;
-                break;
+        if(point1 == -1){
+            reverse(arr, 0, n-1);
+            return;
+        }
+        int point2 = findLessToPoint(arr, point1);
+        swap(arr, point1, point2);
+        reverse(arr,point1 + 1, n-1);
+    }
+    public static int findLessToPoint(int [] arr, int point){
+        for(int i=arr.length - 1; i>=point;i--){
+            if(arr[i] > arr[point]){
+                return i;
             }
         }
-        
-        if(pos1==0 && pos2==0){
-            reverse(arr,0,arr.length-1);
-            // return;
-        }
-        else{
-            int temp = arr[pos1];
-            arr[pos1]=arr[pos2];
-            arr[pos2]=temp;
-            reverse(arr,pos1+1,arr.length-1);
+        return point;
+    }
+    public static void reverse(int [] arr, int si, int ei){
+        while(si<ei){
+            arr[si] = arr[si] + arr[ei];
+            arr[ei] = arr[si] - arr[ei];
+            arr[si] = arr[si] - arr[ei];
+            si++;
+            ei--;
         }
     }
-    private static void reverse(int []arr,int st,int en){
-        while(st<=en){
-            int temp=arr[st];
-            arr[st]=arr[en];
-            arr[en]=temp;
-            st++;en--;
-        }
+    public static void swap(int [] arr, int p1, int p2){
+        arr[p1] = arr[p1] + arr[p2];
+        arr[p2] = arr[p1] - arr[p2];
+        arr[p1] = arr[p1] - arr[p2];
     }
 }
