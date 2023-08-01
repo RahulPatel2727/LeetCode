@@ -11,9 +11,10 @@ class Solution {
             }
             return;
         }
-        find(arr+1, n, k, ds, ans);
         ds.add(arr);
         find(arr+1,n,k,ds,ans);
         ds.remove(ds.size()-1);
+        find(arr+1, n, k, ds, ans);
+        
     }
 }
