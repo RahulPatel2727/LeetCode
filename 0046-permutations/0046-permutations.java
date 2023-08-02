@@ -1,7 +1,7 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
         find(nums, nums.length, 0, ans);
         return ans;
     }
