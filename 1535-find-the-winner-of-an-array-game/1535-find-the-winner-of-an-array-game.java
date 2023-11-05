@@ -2,29 +2,23 @@ class Solution {
     public int getWinner(int[] arr, int k) {
         int n = arr.length;
         int max = arr[0];
-        Queue<Integer> q = new LinkedList<>();
-        for(int it = 1; it<n;it++){
-            max = Math.max(arr[it], max);
-            q.add(arr[it]);
-        }
-        
-        int first = arr[0];
-        int count = 0;
-        
-        while(!q.isEmpty()){
-            int sec = q.poll();
-            if(first>sec){
-                q.add(sec);
-                count++;
+        int cur = arr[0];
+        int c = 0;
+        for(int i=1;i<n;i++){
+            max = Math.max(arr[i], max);
+            if(cur>arr[i]){
+                c++;
             }
             else{
-                q.add(first);
-                first = sec;
-                count = 1;
+                cur = arr[i];
+                c = 1;
             }
-            if(count == k || first == max){
-                return first;
+            if(c==k){
+                return cur;
             }
+        }
+        if(cur == max){
+            return cur;
         }
         return -1;
     }
