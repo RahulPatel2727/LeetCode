@@ -1,5 +1,6 @@
 class Solution {
-    static int mod = 1000000007;
+    // static int mod = 1000000007;
+    static int mod = (int)1e9+7;
     public int countHomogenous(String s) {
         int sum = 0;
         
