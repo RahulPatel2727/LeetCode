@@ -9,18 +9,8 @@ class Solution {
                 cur++;
                 c++;
             }
-            // System.out.println(c);
-            if(cur==s.length() && s.charAt(s.length()-2)==s.charAt(s.length()-1)){
-                c = c + 1;
-            }
             sum = (sum + sum(c)) % mod;
-            // System.out.println(sum(c));
         }
-        // if(s.charAt(s.length()-2)!=s.charAt(s.length()-1)){
-        //     sum = (sum + 1);
-        //     System.out.println("IF");
-        // }
-        
         return sum;
         
     }
