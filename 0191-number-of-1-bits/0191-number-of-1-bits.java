@@ -1,17 +1,11 @@
 public class Solution {
     // you need to treat n as an unsigned value
-    public int hammingWeight(int n) {
-        String s =Integer.toString(n);
-        int c = Integer.parseInt(s);
-        String res=Integer.toBinaryString(c);
-        int i=0;
-        int t=0;
-        while(i<res.length()){
-            if(res.charAt(i)=='1')
-                t++;
-            i++;
-        }
-        return t;
-        
-    }
+   public static int hammingWeight(int n) {
+	int o = 0;
+    	while(n!=0) {
+    		o = o + (n & 1);
+    		n = n>>>1;// for unsigned shifting of bits
+    	}
+    	return o;
+}
 }
