@@ -1,13 +1,13 @@
 class Solution {
     public int countCharacters(String[] words, String chars) {
         int ans = 0;
-        int [] frq = new int[32];
+        int [] frq = new int[26];
         for(char ch : chars.toCharArray()){
             frq[ch - 'a']++;
         }
 
         for(String str : words){
-            int []tfr = new int[32];
+            int []tfr = new int[26];
             int f = 0;
             for(char ch : str.toCharArray()){
                 tfr[ch - 'a']++;
