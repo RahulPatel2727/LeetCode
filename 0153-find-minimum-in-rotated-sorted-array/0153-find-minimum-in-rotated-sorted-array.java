@@ -8,7 +8,7 @@ class Solution {
         int h = n - 1;
         while(l<h){
             int mid = l + (h - l)/2;
-            if(arr[mid]<=arr[n-1]){
+            if(arr[mid]<=arr[h]){
                 h = mid;
             }else{
                 l = mid + 1;
