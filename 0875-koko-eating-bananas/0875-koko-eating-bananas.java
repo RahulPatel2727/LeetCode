@@ -18,6 +18,7 @@ class Solution {
         int curHrs = 0;
         for(int it : arr){
             curHrs += Math.ceil(it/(mid*1.0));
+            if(curHrs>hrs) return false;
         }
         return curHrs<=hrs;
     }
