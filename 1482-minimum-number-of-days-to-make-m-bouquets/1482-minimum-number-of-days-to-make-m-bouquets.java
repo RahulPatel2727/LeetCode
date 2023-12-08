@@ -1,21 +1,23 @@
 class Solution {
     public int minDays(int[] bloomDay, int m, int k) {
         int n = bloomDay.length;
-        if(check(m,k,bloomDay)) return -1;
+        // if(check(m,k,bloomDay)) return -1;
         return bs(bloomDay, m, k);
     }
     static int bs(int []arr, int b, int cf){
         int l=1, h = Arrays.stream(arr).max().getAsInt();
+        int ans = -1;
         while(l<=h){
             int mid = l + (h-l)/2;
             boolean check = possible(mid, arr, b, cf);
             if(check){
                 h = mid - 1;
+                ans = mid;
             }else{
                 l = mid + 1;
             }
         }
-        return l;
+        return ans;
     }
     static boolean possible(int mid, int []arr, int b, int cf){
         int c = 0;
