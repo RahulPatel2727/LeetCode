@@ -46,8 +46,8 @@ class Solution{
             curSum += arr.get(i);
             if(i-si == k-1){
                 maxSum = Math.max(maxSum, curSum);
-                si ++;
-                curSum -= arr.get(i-k+1);
+                curSum -= arr.get(si);
+                si++;
             }
         }
         return maxSum;
