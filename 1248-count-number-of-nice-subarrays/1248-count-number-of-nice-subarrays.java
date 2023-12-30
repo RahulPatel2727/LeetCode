@@ -1,27 +1,23 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
-        return countKOddWindow(nums, k);
+        return countOddSlidingWindow(nums, k) - countOddSlidingWindow(nums, k - 1);
     }
-    static int countKOddWindow(int []arr, int k){
+    static int countOddSlidingWindow(int []arr, int k ){
+        // using Exactly(n) = At most(n) - At most(n-1)
         int n = arr.length;
-        Map<Integer, Integer> mp = new HashMap<>();
-        int sum = 0;
-        int ans = 0;
-        int si = 0;
+        int si = 0; int sum = 0;
+        int count = 0;
         for(int cur = 0; cur<n; cur++){
-            if(arr[cur] % 2 != 0){
-                sum++;
+            if(arr[cur] % 2 != 0) sum++;
+            if(sum <= k) count += cur - si + 1;
+            while(si<=cur && sum > k){
+                if(arr[si]%2!=0){
+                    sum--;
+                }
+                si++;
+                if(sum <= k) count += cur - si + 1;
             }
-            if(sum == k){
-                ans++;
-            }
-            int req = sum - k;
-            if(mp.containsKey(req)){
-                ans += mp.get(req);
-            }
-            mp.put(sum, mp.getOrDefault(sum, 0)+1);
         }
-        // System.out.println(mp);
-        return ans;
+        return count;
     }
 }
