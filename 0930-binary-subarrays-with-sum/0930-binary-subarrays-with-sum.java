@@ -1,23 +1,23 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        return uisingPrefixSum(nums, goal);        
+        return atMostK(nums, goal) - atMostK(nums, goal-1);
     }
-    static int uisingPrefixSum(int []arr, int goal){
-        Map<Integer, Integer> mp = new HashMap<>();
-        int ans=0;
-        int n = arr.length;
-        int sum = 0;
-        for(int i=0;i<n;i++){
-            int val = arr[i];
-            sum += val;
-            if(sum == goal){
-                ans++;
+    static int atMostK(int []arr, int goal){
+        int ans = 0;
+        int curSum = 0;
+        int si = 0;
+        for(int cur = 0; cur<arr.length; cur++){
+            curSum += arr[cur];
+            if(curSum<=goal){
+                ans += cur - si + 1;
             }
-            int rem = sum - goal;
-            if(mp.containsKey(rem)){
-                ans += mp.get(rem);
+            while(si<=cur && curSum > goal){
+                curSum -= arr[si];
+                si++;
+                if(curSum<=goal){
+                    ans += cur - si + 1;
+                }
             }
-            mp.put(sum, mp.getOrDefault(sum, 0)+1);
         }
         return ans;
     }
