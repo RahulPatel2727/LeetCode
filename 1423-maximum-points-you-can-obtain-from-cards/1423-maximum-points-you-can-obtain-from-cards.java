@@ -18,7 +18,7 @@ class Solution {
             it++;
         }
         maxSum = Math.max(st[k - 1], en[k - 1]);
-        maxSum = Math.max(maxSum, startEndMax(arr, k));
+        // maxSum = Math.max(maxSum, startEndMax(arr, k));
 
         int itr = 0;
         for (int i = k - 2; i >= 0; i--) {
@@ -27,6 +27,8 @@ class Solution {
         }
         return maxSum;
     }
+    
+    // we don't need this i can optmise by removing it 
     static int startEndMax(int[] arr, int k) {
         int n = arr.length;
         int si = 0, ei = n - 1;
@@ -44,3 +46,7 @@ class Solution {
         return sum;
     }
 }
+
+
+// 19 12
+// 23 47 44 24 38 47 34 58 19 33 67 17 33 20 63 46 31 50 18 
