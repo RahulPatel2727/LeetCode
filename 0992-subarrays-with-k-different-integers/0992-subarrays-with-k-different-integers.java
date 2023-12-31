@@ -11,7 +11,8 @@ class Solution {
             int element = arr[cur];
             int ind = (element - '0' + 48);
             frq[ind]++;
-            if(set.isEmpty() || !set.contains(element)) set.add(element);
+            // if(set.isEmpty() || !set.contains(element)) set.add(element);
+            set.add(element);
             if(set.size()<=k){
                 count += cur - si + 1;
             }
