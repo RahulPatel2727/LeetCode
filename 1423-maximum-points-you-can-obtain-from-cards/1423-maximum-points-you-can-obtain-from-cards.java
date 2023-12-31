@@ -32,19 +32,12 @@ class Solution {
         int si = 0, ei = n - 1;
         int sum = 0;
         while (si <= ei && k > 0) {
-            if (arr[si] > arr[ei]) {
+            if (arr[si] >= arr[ei]) {
                 sum += arr[si];
                 si++;
-            } else if (arr[si] < arr[ei]) {
+            } else {
                 sum += arr[ei];
                 ei--;
-            } else {
-                sum += arr[si];
-                if (si <= ei && arr[si + 1] > arr[ei - 1]) {
-                    si++;
-                } else {
-                    ei--;
-                }
             }
             k--;
         }
