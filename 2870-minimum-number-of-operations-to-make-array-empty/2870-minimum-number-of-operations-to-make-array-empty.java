@@ -9,16 +9,8 @@ class Solution {
         for(Integer it : mp.keySet()){
             int v = mp.get(it);
             if(v==1) return -1;
-            if(v%3==0){
-                c+=v/3;
-            }else if(v%3==2){
-                c+=v/3+1;
-            }else if(v%3==1){
-                c+=v/3+1;
-            }else{
-                c+=v/2;
-            }
+            c += Math.ceil((double) v/3);
         }
-        return c>0?c:-1;
+        return c;
     }
 }
