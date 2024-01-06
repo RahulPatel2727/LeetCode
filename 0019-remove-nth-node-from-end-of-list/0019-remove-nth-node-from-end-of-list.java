@@ -10,20 +10,24 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        return delete(head,n);
+        return delete2(head,n);
     }
-    static ListNode delete(ListNode list, int k){
-        int c = 0;
-        var temp = list;
-        while(temp!=null){c++; temp=temp.next;};
-        int itr = c - k;
-        if( k>c || k<=0) return list;
-        if(itr==0) return list.next;
-        temp = list;
-        while(itr-->1){
-            temp = temp.next;
+     static ListNode delete2(ListNode list, int k){
+        if(k<=0) return list;
+        ListNode slow = list, fast = list;
+        for(int i=1;i<k && fast != null;i++){
+            fast = fast.next;
         }
-        temp.next = temp.next.next;
+
+        if(fast==null) return list;// larger than list
+        if(fast.next==null) return list.next; // head ko delete
+
+        fast=fast.next;
+        while(fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next = slow.next.next;
         return list;
     }
 }
