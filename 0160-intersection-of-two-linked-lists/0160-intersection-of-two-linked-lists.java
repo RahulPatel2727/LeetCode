@@ -16,6 +16,7 @@ public class Solution {
     static ListNode intersectionPoint(ListNode a, ListNode b){
         var aa = a; var bb = b;
         while(aa.next!=null && bb.next!=null){
+            if(aa==bb) return aa;
             aa = aa.next;
             bb = bb.next;
         }
@@ -33,8 +34,6 @@ public class Solution {
         }
         while(si!=null && low!=null){
             if(si==low) {
-                // var ans = si;
-                // ans.next = null;
                 return si;
             }
             si=si.next; low = low.next;
