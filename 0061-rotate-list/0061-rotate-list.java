@@ -17,6 +17,8 @@ class Solution {
         int n = 0;
         var cur = head;
         ListNode tail = null;
+        
+        // length and tail finding
         while(cur != null) {
             n++;
             tail = cur;
@@ -27,10 +29,13 @@ class Solution {
         n = n - k;
         cur = head;
         ListNode pre = null;
+        
+        // new head finding
         while(n-->0){
             pre = cur;
             cur = cur.next;
         }
+        // connection changing
         pre.next = null;
         tail.next = head;
         head = cur;
