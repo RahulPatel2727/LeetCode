@@ -10,20 +10,57 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
-        return sort(head);
+         return mergeSort(head);
     }
-    static ListNode sort(ListNode head){
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        var cur = head;
-        while(cur!=null){
-            pq.add(cur.val);
+    static ListNode mergeSort(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        var mid = mid(head);
+        var right = mid.next;
+        mid.next = null;
+        var left = head;
+        left = mergeSort(left);
+        right = mergeSort(right);
+        return mergeLists(left, right);
+    }
+
+    static ListNode mid(ListNode list) {
+        var f = list.next;
+        var s = list;
+        while (f != null && f.next != null) {
+            s = s.next;
+            f = f.next.next;
+        }
+        return s;
+    }
+
+    static ListNode mergeLists(ListNode a, ListNode b) {
+        var ans = new ListNode();
+        var cur = ans;
+        while (a != null || b != null) {
+            ListNode tepm;
+            if (a != null && b != null) {
+                if (a.val <= b.val) {
+                    tepm = a.next;
+                    cur.next = a;
+                    a = tepm;
+                } else {
+                    tepm = b.next;
+                    cur.next = b;
+                    b = tepm;
+                }
+            } else if (a != null) {
+                tepm = a.next;
+                cur.next = a;
+                a = tepm;
+            } else {
+                tepm = b.next;
+                cur.next = b;
+                b = tepm;
+            }
             cur = cur.next;
         }
-        cur = head; 
-        while(cur!=null){
-            cur.val = pq.poll();
-            cur = cur.next;
-        }
-        return head;
+        return ans.next;
     }
 }
