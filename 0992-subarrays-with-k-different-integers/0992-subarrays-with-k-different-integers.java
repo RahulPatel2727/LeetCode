@@ -2,6 +2,7 @@ class Solution {
     public int subarraysWithKDistinct(int[] nums, int k) {
         return atmost(nums, k) - atmost(nums, k-1);
     }
+    // frq array is better than map acc to time complexity but for space map is better
     static int atmost(int []arr, int k){
         int n = arr.length;
         int si = 0; int count = 0;
